@@ -1,14 +1,18 @@
-# Second Chance - Backend Final v2.1
+# Second Chance - Backend Final v2.2
 
 
 ## Tasks Accomplished
 
+- Used the `natural` library to perform sentiment analysis on English sentences.
+- Implemented an Express server with a `/sentiment` endpoint.
+- Tested the sentiment analysis endpoint using Curl and Postman API.
+
+
+## Previous Tasks Accomplished:
 - Developed a search endpoint in `searchRoutes.js` to filter items based on different criteria.
 - Integrated the search routes into the Express application (`app.js`).
 - Tested the search endpoint using Curl and Postman API.
 - Established MongoDB connection in `db.js`.
-
-## Previous Tasks Accomplished:
 - Created endpoint to retrieve all secondChance items: `GET /api/secondchance/items`.
 - Developed endpoint to add a secondChance item: `POST /api/secondchance/items`.
 - Implemented endpoint to fetch a specific secondChance item by ID: `GET /api/secondchance/items/:id`.
