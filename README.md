@@ -1,14 +1,18 @@
-# Second Chance - Backend Final v2.2
-
+# Second Chance - Backend Final v3.0
 
 ## Tasks Accomplished
 
-- Used the `natural` library to perform sentiment analysis on English sentences.
-- Implemented an Express server with a `/sentiment` endpoint.
-- Tested the sentiment analysis endpoint using Curl and Postman API.
+- Created a new file `authRoutes.js` and added an endpoint `/register` to register a user.
+- Handled authentication by including JWT token generation.
+- Handled errors and structured responses in a server environment.
+- Configured the `api/auth` route in the Express application (`app.js`) to use the routes defined in `authRoutes.js`.
+- Tested the authentication endpoints using Curl and Postman API.
 
 
 ## Previous Tasks Accomplished:
+- Used the `natural` library to perform sentiment analysis on English sentences.
+- Implemented an Express server with a `/sentiment` endpoint.
+- Tested the sentiment analysis endpoint using Curl and Postman API.
 - Developed a search endpoint in `searchRoutes.js` to filter items based on different criteria.
 - Integrated the search routes into the Express application (`app.js`).
 - Tested the search endpoint using Curl and Postman API.
