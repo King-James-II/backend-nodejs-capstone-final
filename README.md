@@ -1,15 +1,18 @@
-# Second Chance - Backend Final v3.0
+# Second Chance - Backend Final v3.1
 
 ## Tasks Accomplished
 
+- Created an endpoint to login a user (`/login`) in `authRoutes.js`
+- Handled authentication by including JWT token generation
+- Handled errors and structured responses in a server environment
+
+
+## Previous Tasks Accomplished:
 - Created a new file `authRoutes.js` and added an endpoint `/register` to register a user.
 - Handled authentication by including JWT token generation.
 - Handled errors and structured responses in a server environment.
 - Configured the `api/auth` route in the Express application (`app.js`) to use the routes defined in `authRoutes.js`.
 - Tested the authentication endpoints using Curl and Postman API.
-
-
-## Previous Tasks Accomplished:
 - Used the `natural` library to perform sentiment analysis on English sentences.
 - Implemented an Express server with a `/sentiment` endpoint.
 - Tested the sentiment analysis endpoint using Curl and Postman API.
