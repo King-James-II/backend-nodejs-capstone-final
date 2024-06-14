@@ -28,7 +28,7 @@ const client = new MongoClient(url)
     const cursor = await collection.find({})
     const documents = await cursor.toArray()
 
-    if(documents.length == 0) {
+    if(documents.length === 0) {
       // Insert data into the collection
       const insertResult = await collection.insertMany(data)
       console.log('Inserted documents:', insertResult.insertedCount)
