@@ -47,7 +47,7 @@ router.post('/', upload.single('file'), async (req, res, next) => {
     // Use collection method to retrieve secondChanceItems collection
     const collection = db.collection('secondChanceItems')
     // Get the last id, increment it by 1, and set it to the new secondChanceItem
-    const lastItemQuery = await collection.find().sort({ 'id': -1 }).limit(1)
+    const lastItemQuery = await collection.find().sort({ id: -1 }).limit(1)
     // Create a new secondChanceItem from the request body
     let secondChanceItem = req.body
     await lastItemQuery.forEach(item => {
@@ -92,7 +92,7 @@ router.put('/:id', async (req, res, next) => {
     // Connect to MongoDB
     const db = await connectToDatabase()
     // Use collection method to retrieve secondChanceItems collection
-    const collection = db.collection("secondChanceItems")
+    const collection = db.collection('secondChanceItems')
     const id = req.params.id
     // Find Item by its ID display return a response if item doesn't exist.
     const secondChanceItem = await collection.findOne({ id })
@@ -105,7 +105,7 @@ router.put('/:id', async (req, res, next) => {
     secondChanceItem.condition = req.body.condition
     secondChanceItem.age_days = req.body.age_days
     secondChanceItem.description = req.body.description
-    secondChanceItem.age_years = Number((secondChanceItem.age_days/365).toFixed(1))
+    secondChanceItem.age_years = Number((secondChanceItem.age_days / 365).toFixed(1))
     secondChanceItem.updatedAt = new Date()
     const updatepreloveItem = await collection.findOneAndUpdate(
       { id },
@@ -114,9 +114,9 @@ router.put('/:id', async (req, res, next) => {
     )
     // Send confirmation of the sucessful update.
     if (updatepreloveItem) {
-      res.json({ 'uploaded': 'success' })
+      res.json({ uploaded: 'success' })
     } else {
-      res.json({ 'uploaded': 'failed' })
+      res.json({ uploaded: 'failed' })
     }
   } catch (e) {
     next(e)
@@ -139,7 +139,7 @@ router.delete('/:id', async (req, res, next) => {
     };
     // Delete the item and send a response
     await collection.deleteOne({ id })
-    res.json({ 'deleted': 'success' })
+    res.json({ deleted: 'success' })
   } catch (e) {
     next(e)
   }
