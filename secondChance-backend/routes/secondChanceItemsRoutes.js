@@ -73,47 +73,47 @@ router.get('/:id', async (req, res, next) => {
         // Connect to MongoDB
         const db = await connectToDatabase()
         // Use collection method to retrieve secondChanceItems collection
-        const collection = db.collection("secondChanceItems");
-        const id = req.params.id;
+        const collection = db.collection("secondChanceItems")
+        const id = req.params.id
         // Find Item by its ID
-        const secondChanceItem = await collection.findOne({id: id});
+        const secondChanceItem = await collection.findOne({id: id})
         // Respond with the secondChanceItem as a JSON object. 
         if (!secondChanceItem) {
-            res.status(404).send("Item was not found within the listings");
+            res.status(404).send("Item was not found within the listings")
         };
 
-        res.status(200).json(secondChanceItem);
+        res.status(200).json(secondChanceItem)
     } catch (e) {
-        next(e);
+        next(e)
     }
-});
+})
 
 // Update an existing item
 router.put('/:id', async(req, res,next) => {
     try {
         // Connect to MongoDB
-        const db = await connectToDatabase();
+        const db = await connectToDatabase()
         // Use collection method to retrieve secondChanceItems collection
-        const collection = db.collection("secondChanceItems");
-        const id = req.params.id;
+        const collection = db.collection("secondChanceItems")
+        const id = req.params.id
         // Find Item by its ID display return a response if item doesn't exist.
-        const secondChanceItem = await collection.findOne({id});
+        const secondChanceItem = await collection.findOne({id})
         if (!secondChanceItem) {
             logger.error("Item was not found to update.")
-              return res.status(404).json({ error: "Item was not found to update."});
+              return res.status(404).json({ error: "Item was not found to update."})
         };
         // Update the item's attribues
-        secondChanceItem.category = req.body.category;
-        secondChanceItem.condition = req.body.condition;
-        secondChanceItem.age_days = req.body.age_days;
-        secondChanceItem.description = req.body.description;
-        secondChanceItem.age_years = Number((secondChanceItem.age_days/365).toFixed(1));
-        secondChanceItem.updatedAt = new Date();
+        secondChanceItem.category = req.body.category
+        secondChanceItem.condition = req.body.condition
+        secondChanceItem.age_days = req.body.age_days
+        secondChanceItem.description = req.body.description
+        secondChanceItem.age_years = Number((secondChanceItem.age_days/365).toFixed(1))
+        secondChanceItem.updatedAt = new Date()
         const updatepreloveItem = await collection.findOneAndUpdate(
             { id },
             { $set: secondChanceItem },
             { returnDocument: 'after' }
-        );
+        )
         // Send confirmation of the sucessful update.
         if (updatepreloveItem) {
             res.json({"uploaded": "success"})
@@ -121,30 +121,30 @@ router.put('/:id', async(req, res,next) => {
             res.json({"uploaded": "failed"})
         }
     } catch (e) {
-        next(e);
+        next(e)
     }
-});
+})
 
 // Delete an existing item
 router.delete('/:id', async(req, res,next) => {
     try {
         // Connect to MongoDB
-        const db = await connectToDatabase();
+        const db = await connectToDatabase()
         // Use collection method to retrieve secondChanceItems collection
-        const collection = db.collection("secondChanceItems");
-        const id = req.params.id;
+        const collection = db.collection("secondChanceItems")
+        const id = req.params.id
         // Find Item by its ID display return a response if item doesn't exist.
-        const secondChanceItem = await collection.findOne({id});
+        const secondChanceItem = await collection.findOne({id})
         if (!secondChanceItem) {
             logger.error("Item was not found to update.")
-              return res.status(404).json({ error: "Item was not found to update."});
+              return res.status(404).json({ error: "Item was not found to update."})
         };
         // Delete the item and send a response
-        await collection.deleteOne({ id });
-        res.json({"deleted": "success"});
-    } catch (e) {
-        next(e);
-    }
-});
+        await collection.deleteOne({ id })
+        res.json({"deleted": "success"})
+  } catch (e) {
+    next(e)
+  }
+})
 
-module.exports = router;
+module.exports = router
