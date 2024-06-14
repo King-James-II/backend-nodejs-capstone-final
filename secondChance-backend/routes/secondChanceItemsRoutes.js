@@ -1,77 +1,77 @@
-const express = require('express');
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
-const router = express.Router();
-const connectToDatabase = require('../models/db');
-const logger = require('../logger');
+const express = require('express')
+const multer = require('multer')
+const path = require('path')
+const fs = require('fs')
+const router = express.Router()
+const connectToDatabase = require('../models/db')
+const logger = require('../logger')
 
 // Define the upload directory path
-const directoryPath = 'public/images';
+const directoryPath = 'public/images'
 
 // Set up storage for uploaded files
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, directoryPath); // Specify the upload directory
+    cb(null, directoryPath) // Specify the upload directory
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname); // Use the original file name
+    cb(null, file.originalname) // Use the original file name
   },
-});
+})
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage: storage })
 
 
 // Get all secondChanceItems
 router.get('/', async (req, res, next) => {
-    logger.info('/ called');
+    logger.info('/ called')
     try {
         // Connect to MongoDB
-        const db = await connectToDatabase();
+        const db = await connectToDatabase()
         // Use collection method to retrieve secondChanceItems collection
-        const collection = db.collection("secondChanceItems");
+        const collection = db.collection("secondChanceItems")
         // Get all secondChanceItems
-        const secondChanceItems = await collection.find({}).toArray();
+        const secondChanceItems = await collection.find({}).toArray()
         // Send the secondChanceItems as a response
-        res.json(secondChanceItems);
+        res.json(secondChanceItems)
 
     } catch (e) {
         logger.console.error('oops something went wrong', e)
-        next(e);
+        next(e)
     }
-});
+})
 
 // Add a new item
 router.post('/', upload.single('file'), async(req, res,next) => {
     try {
         // Connect to MongoDB
-        const db = await connectToDatabase();
+        const db = await connectToDatabase()
         // Use collection method to retrieve secondChanceItems collection
-        const collection = db.collection("secondChanceItems");
+        const collection = db.collection("secondChanceItems")
         // Get the last id, increment it by 1, and set it to the new secondChanceItem
-        const lastItemQuery = await collection.find().sort({'id': -1}).limit(1);
+        const lastItemQuery = await collection.find().sort({'id': -1}).limit(1)
         // Create a new secondChanceItem from the request body
-        let secondChanceItem = req.body;
+        let secondChanceItem = req.body
         await lastItemQuery.forEach(item => {
-            secondChanceItem.id = (parseInt(item.id) + 1).toString();
-        });
+            secondChanceItem.id = (parseInt(item.id) + 1).toString()
+        })
         // Set the current date to the new item
-        const date_added = Math.floor(new Date().getTime() / 1000);
+        const date_added = Math.floor(new Date().getTime() / 1000)
         secondChanceItem.date_added = date_added
         // Add the new SecondChanceItem to the database
-        secondChanceItem = await collection.insertOne(secondChanceItem);
+        secondChanceItem = await collection.insertOne(secondChanceItem)
         // Upload the image to the images directory
-        res.status(201).json(secondChanceItem);
+        res.status(201).json(secondChanceItem)
     } catch (e) {
-        next(e);
+        next(e)
     }
-});
+})
 
 // Get a single secondChanceItem by ID
 router.get('/:id', async (req, res, next) => {
     try {
         // Connect to MongoDB
-        const db = await connectToDatabase();
+        const db = await connectToDatabase()
         // Use collection method to retrieve secondChanceItems collection
         const collection = db.collection("secondChanceItems");
         const id = req.params.id;
