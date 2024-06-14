@@ -1,14 +1,17 @@
-# Second Chance - Backend Final v4.0
+# Second Chance - Backend Final v4.1
 
 
 ## Tasks Accomplished
 
-- Added linting to the repository using a GitHub workflow containing GitHub Actions
-- Configured automatic linting to check for errors whenever a developer creates a pull request or merges a branch into the default main branch
+- Deployed MongoDB using Kubernetes
+- Deployed the back-end server using Kubernetes
+- Deployed the front-end server using IBM Code Engine
 
 
 ## Previous Tasks Accomplished:
 
+- Added linting to the repository using a GitHub workflow containing GitHub Actions
+- Configured automatic linting to check for errors whenever a developer creates a pull request or merges a branch into the default main branch
 - Ran the back-end server
 - Configured the back-end URL for the front end to use, inside `.env`
 - Tested the following functionalities:
