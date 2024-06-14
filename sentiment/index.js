@@ -4,7 +4,7 @@ const express = require('express')
 const logger = require('./logger')
 const expressPino = require('express-pino-logger')({ logger })
 // Import the natural library
-const natural = require("natural")
+const natural = require('natural')
 
 // Initialize the express server
 const app = express()
@@ -18,7 +18,6 @@ app.use(expressPino)
 app.post('/sentiment', async (req, res) => {
   // Task 4: extract the sentence parameter
   const { sentence } = req.query
-
 
   if (!sentence) {
     logger.error('No sentence provided')
