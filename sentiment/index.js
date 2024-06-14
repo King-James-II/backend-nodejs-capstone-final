@@ -1,6 +1,6 @@
 require('dotenv').config()
 const express = require('express')
-const axios = require('axios')
+// const axios = require('axios')
 const logger = require('./logger')
 const expressPino = require('express-pino-logger')({ logger })
 // Import the natural library
@@ -8,7 +8,7 @@ const natural = require("natural")
 
 // Initialize the express server
 const app = express()
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 
 app.use(express.json())
 app.use(expressPino)
@@ -16,7 +16,6 @@ app.use(expressPino)
 // Define the sentiment analysis route
 // Create the POST /sentiment analysis
 app.post('/sentiment', async (req, res) => {
-
   // Task 4: extract the sentence parameter
   const { sentence } = req.query
 
@@ -29,19 +28,19 @@ app.post('/sentiment', async (req, res) => {
   // Initialize the sentiment analyzer with the Natural's PorterStemmer and "English" language
   const Analyzer = natural.SentimentAnalyzer
   const stemmer = natural.PorterStemmer
-  const analyzer = new Analyzer("English", stemmer, "afinn")
+  const analyzer = new Analyzer('English', stemmer, 'afinn')
 
   // Perform sentiment analysis
   try {
     const analysisResult = analyzer.getSentiment(sentence.split(' '))
 
-    let sentiment = "neutral"
+    let sentiment = 'neutral'
 
     // Set sentiment to negative or positive based on score rules
     if (analysisResult < 0) {
-      sentiment = "negative"
+      sentiment = 'negative'
     } else if (analysisResult > 0.33) {
-      sentiment = "positive"
+      sentiment = 'positive'
     }
 
     // Logging the result
@@ -52,10 +51,9 @@ app.post('/sentiment', async (req, res) => {
   } catch (error) {
     logger.error(`Error performing sentiment analysis: ${error}`)
     // Task 7: if there is an error, return a HTTP code of 500 and the json {'message': 'Error performing sentiment analysis'}
-    res.status(500).json({ "message": "Error processing sentimment analysis." })
-
+    res.status(500).json({ message: 'Error processing sentimment analysis.' })
   }
-});
+})
 
 app.listen(port, () => {
   logger.info(`Server running on port ${port}`)
