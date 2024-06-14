@@ -40,7 +40,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // Add a new item
-router.post ('/', upload.single('file'), async(req, res, next) => {
+router.post('/', upload.single('file'), async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase()
@@ -87,7 +87,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 // Update an existing item
-router.put('/:id', async(req, res, next) => {
+router.put('/:id', async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase()
@@ -124,7 +124,7 @@ router.put('/:id', async(req, res, next) => {
 })
 
 // Delete an existing item
-router.delete('/:id', async(req, res, next) => {
+router.delete('/:id', async (req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase()
