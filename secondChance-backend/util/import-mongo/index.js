@@ -4,14 +4,13 @@ const fs = require('fs')
 
 // MongoDB connection URL with authentication options
 const url = `${process.env.MONGO_URL}`
-const path = require('path');
-const filename = path.join(__dirname, 'secondChanceItems.json');
+const path = require('path')
+const filename = path.join(__dirname, 'secondChanceItems.json')
 const dbName = 'secondChance'
 const collectionName = 'secondChanceItems'
 
 // notice you have to load the array of items into the data object
 const data = JSON.parse(fs.readFileSync(filename, 'utf8')).docs
-
 
 // connect to database and insert data into the collection
 async function loadData () {
