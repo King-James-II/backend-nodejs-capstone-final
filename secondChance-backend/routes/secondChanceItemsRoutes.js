@@ -21,7 +21,6 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
-
 // Get all secondChanceItems
 router.get('/', async (req, res, next) => {
   logger.info('/ called')
@@ -34,7 +33,6 @@ router.get('/', async (req, res, next) => {
     const secondChanceItems = await collection.find({}).toArray()
     // Send the secondChanceItems as a response
     res.json(secondChanceItems)
-
   } catch (e) {
     logger.console.error('oops something went wrong', e)
     next(e)
@@ -42,7 +40,7 @@ router.get('/', async (req, res, next) => {
 })
 
 // Add a new item
-router.post('/', upload.single('file'), async(req, res, next) => {
+router.post ('/', upload.single('file'), async(req, res, next) => {
   try {
     // Connect to MongoDB
     const db = await connectToDatabase()
@@ -57,7 +55,7 @@ router.post('/', upload.single('file'), async(req, res, next) => {
     })
     // Set the current date to the new item
     const dateAdded = Math.floor(new Date().getTime() / 1000)
-    secondChanceItem.dateAdded = dateAdded
+    secondChanceItem.date_added = dateAdded
     // Add the new SecondChanceItem to the database
     secondChanceItem = await collection.insertOne(secondChanceItem)
     // Upload the image to the images directory
@@ -77,7 +75,7 @@ router.get('/:id', async (req, res, next) => {
     const id = req.params.id
     // Find Item by its ID
     const secondChanceItem = await collection.findOne({ id: id })
-    // Respond with the secondChanceItem as a JSON object. 
+    // Respond with the secondChanceItem as a JSON object.
     if (!secondChanceItem) {
       res.status(404).send('Item was not found within the listings')
     };
