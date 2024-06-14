@@ -4,7 +4,7 @@ const fs = require('fs')
 
 // MongoDB connection URL with authentication options
 const url = `${process.env.MONGO_URL}`
-const filename = `./secondChanceItems.json`
+const filename = './secondChanceItems.json'
 const dbName = 'secondChance'
 const collectionName = 'secondChanceItems'
 
