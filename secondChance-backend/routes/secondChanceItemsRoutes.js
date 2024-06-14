@@ -52,12 +52,12 @@ router.post('/', upload.single('file'), async(req, res, next) => {
     const lastItemQuery = await collection.find().sort({ 'id': -1 }).limit(1)
     // Create a new secondChanceItem from the request body
     let secondChanceItem = req.body
-    await lastItemQuery.forEach(item => { 
+    await lastItemQuery.forEach(item => {
       secondChanceItem.id = (parseInt(item.id) + 1).toString()
     })
     // Set the current date to the new item
-    const date_added = Math.floor(new Date().getTime() / 1000)
-    secondChanceItem.date_added = date_added
+    const dateAdded = Math.floor(new Date().getTime() / 1000)
+    secondChanceItem.dateAdded = dateAdded
     // Add the new SecondChanceItem to the database
     secondChanceItem = await collection.insertOne(secondChanceItem)
     // Upload the image to the images directory
