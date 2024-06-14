@@ -4,7 +4,7 @@ const fs = require('fs')
 
 // MongoDB connection URL with authentication options
 const url = `${process.env.MONGO_URL}`
-const filename = `${__dirname}/secondChanceItems.json`
+const filename = `./secondChanceItems.json`
 const dbName = 'secondChance'
 const collectionName = 'secondChanceItems'
 
@@ -12,8 +12,8 @@ const collectionName = 'secondChanceItems'
 const data = JSON.parse(fs.readFileSync(filename, 'utf8')).docs
 
 // connect to database and insert data into the collection
-async function loadData() {
-const client = new MongoClient(url)
+async function loadData () {
+  const client = new MongoClient(url)
 
   try {
     // Connect to the MongoDB client
@@ -25,13 +25,13 @@ const client = new MongoClient(url)
 
     // collection will be created if it does not exist
     const collection = db.collection(collectionName)
-    const cursor = await collection.find({});
-    const documents = await cursor.toArray();
+    const cursor = await collection.find({})
+    const documents = await cursor.toArray()
 
-    if(documents.length == 0) {
+    if (documents.length === 0) {
       // Insert data into the collection
-      const insertResult = await collection.insertMany(data);
-      console.log('Inserted documents:', insertResult.insertedCount);
+      const insertResult = await collection.insertMany(data)
+      console.log('Inserted documents:', insertResult.insertedCount)
     } else {
       console.log('Items already exists in DB')
     }
@@ -46,5 +46,5 @@ const client = new MongoClient(url)
 loadData()
 
 module.exports = {
-  loadData,
-};
+  loadData
+}
