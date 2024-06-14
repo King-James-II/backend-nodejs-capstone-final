@@ -3,16 +3,18 @@
 
 ## Tasks Accomplished
 
+- Added linting to the repository using a GitHub workflow containing GitHub Actions
+- Configured automatic linting to check for errors whenever a developer creates a pull request or merges a branch into the default main branch
+
+
+## Previous Tasks Accomplished:
+
 - Ran the back-end server
 - Configured the back-end URL for the front end to use, inside `.env`
 - Tested the following functionalities:
   - Main page loads and lists all 16 items
   - User registration and login, including the ability to log out and log back in
   - Logged-in user can add items, see item details, and change profile name
-
-
-## Previous Tasks Accomplished:
-
 - Created an endpoint to update user credentials in the database (`/update`) in `authRoutes.js`
 - Handled authentication by including JWT token generation
 - Handled errors and structured responses in the server environment during and after an update
